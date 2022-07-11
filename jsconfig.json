@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "$tests": [
+                "tests"
+            ],
+            "$lib": [
+                "lib"
+            ],
+            "$lib/*": [
+                "lib/*"
+            ],
+            "$tests/*": [
+                "tests/*"
+            ]
+        },
+    },
+    "extends": "./.svelte-kit/tsconfig.json"
+}
