@@ -4,6 +4,7 @@
 	import { fade } from 'svelte/transition';
 	import navigationState from '../stores/navigationState';
 	import PageLoader from '../components/PageLoader.svelte';
+	import Footer from '../components/misc/Footer.svelte';
 	export let title = 'Blog';
 </script>
 
@@ -31,6 +32,7 @@
 		<div class="nav-margin-fix" />
 		<slot />
 	</div>
+	<Footer />
 </div>
 
 <style>
