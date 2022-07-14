@@ -1,40 +1,54 @@
 <script>
-	import heart from './icons/heart.svg';
+	import { base } from '$app/paths';
 	export let data;
 	const { title, slugField, author, featuredImage, category } = data.fields;
 	let imgUrl;
 	$: if (featuredImage) {
 		imgUrl = featuredImage.fields.file.url;
 	} else {
-		imgUrl = 'https://via.placeholder.com/800x400';
+		imgUrl = 'https://via.placeholder.com/600x400';
 	}
+	export let noImg = false;
+	export let long = false;
+	export let autoH = false;
+	export let absoluteBadge = true;
 </script>
 
-<a href={'post/' + slugField || '/'} class="card-wrapper">
+<a href={`${base}/post/${slugField}`} class="card-wrapper" class:long class:autoH>
+	{#if category}
+		<div class="reactions" class:absoluteBadge>
+			<span>{category}</span>
+		</div>
+	{/if}
 	<div class="card">
-		{#if category}
-			<div class="reactions">
-				<span>{category}</span>
-			</div>
+		{#if !noImg}
+			<img class="cover" src={imgUrl} alt={data.title} />
 		{/if}
-		<img class="cover" src={imgUrl} alt={data.title} />
 		<div class="content">
-			<h4>{title || `Lorem ispum dolor emet`}</h4>
+			<h5>{title || `Lorem ispum dolor emet`}</h5>
 		</div>
 	</div>
 </a>
 
 <style>
 	.card-wrapper {
+		position: relative;
+
 		display: inline-block;
 		background: #fff;
 		border-radius: 0.5rem;
 		box-shadow: 0 0.5rem 1rem hsla(187, 85%, 18%, 0.1);
 		cursor: pointer;
-		transition: box-shadow 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+	.long {
+		grid-row: auto/span 3;
+	}
+	.autoH {
+		/* height will be determined by inner content, not grid */
+		grid-row: auto;
 	}
 	.card {
-		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -42,10 +56,12 @@
 		height: 100%;
 	}
 	.card-wrapper:hover {
-		box-shadow: 0 0.5rem 1rem hsla(187, 85%, 18%, 0.4);
+		box-shadow: 0 0rem 12rem 2rem hsla(187, 85%, 18%, 0.185);
+		transform: scale(1.1);
+		z-index: 4;
 	}
 	.card-wrapper:hover .cover {
-		transform: scale(1.1);
+		transform: scale(1.05);
 	}
 	.card .cover {
 		width: 100%;
@@ -59,35 +75,28 @@
 		align-items: center;
 		justify-content: flex-start;
 		padding: 0.2rem 0.6rem;
-		position: absolute;
 		z-index: 2;
+	}
+	.absoluteBadge {
+		position: absolute;
 		top: 0;
 		left: 0;
 		background-color: var(--clr-secondary);
-		border-radius: 0 0.6rem 0.6rem 0;
 	}
 	.content {
 		padding: 1rem;
-		z-index: 3;
+		z-index: 10;
 	}
-	.reactions img {
-		width: 1rem;
-		height: 1rem;
-		margin-right: 0.5rem;
-	}
-	.card h4 {
+	h5 {
 		margin: 0;
 	}
-	.card p {
-		margin: 0;
-		margin-top: 0.4rem;
-	}
-	.card a {
-		display: inline-block;
-		background-color: var(--clr-accent);
-		padding: 0.2rem 1rem;
-		margin-top: 1rem;
-		color: var(--clr-white);
-		border-radius: 0.4rem;
+
+	@media screen and (prefers-reduced-motion: reduce) {
+		.card-wrapper {
+			transition: none;
+		}
+		.card-wrapper:hover {
+			transform: scale(1);
+		}
 	}
 </style>

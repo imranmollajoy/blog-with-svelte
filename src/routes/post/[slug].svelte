@@ -23,7 +23,6 @@
 <script>
 	import RichContent from '../../components/shared/RichContent.svelte';
 	import Container from '../../components/shared/Container.svelte';
-	import Layout from '../../components/shared/Layout.svelte';
 
 	let tags = ['Featured', 'Nice', 'Technology'];
 	export let blog;
@@ -38,15 +37,13 @@
 	}
 </script>
 
-<Layout title={'Lorem ipsum dolor sit...'}>
-	<Container>
-		<h2>{title}</h2>
-		<img src={imgUrl} alt="" />
-		<div class="body">
-			<RichContent document={blogBody} />
-		</div>
-	</Container>
-</Layout>
+<Container>
+	<h2>{title}</h2>
+	<img src={imgUrl} alt="" />
+	<div class="body">
+		<RichContent document={blogBody} />
+	</div>
+</Container>
 
 <style>
 	.body {

@@ -2,7 +2,10 @@
 	import Card from '../shared/Card.svelte';
 	export let title = 'Section';
 	export let blogs = [];
-	export let moreLink = '';
+	export let moreLink = '/latest';
+
+	let firstPost = blogs.slice(0, 1);
+	let rest = blogs.slice(1);
 </script>
 
 <section>
@@ -11,8 +14,11 @@
 		<a href={moreLink}>More</a>
 	</div>
 	<div class="blogs">
-		{#each blogs as post (post.fields.slugField)}
-			<Card data={post} />
+		{#each firstPost as post (post.fields.slugField)}
+			<Card data={post} long />
+		{/each}
+		{#each rest as post (post.fields.slugField)}
+			<Card data={post} noImg absoluteBadge={false} />
 		{/each}
 	</div>
 </section>

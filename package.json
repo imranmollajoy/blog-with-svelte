@@ -25,6 +25,7 @@
 	"dependencies": {
 		"@contentful/rich-text-html-renderer": "^15.13.1",
 		"contentful": "^9.1.32",
-		"marked": "^4.0.17"
+		"marked": "^4.0.17",
+		"svelte-paginate": "^0.0.1"
 	}
 }

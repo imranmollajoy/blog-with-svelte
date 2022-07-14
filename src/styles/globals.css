@@ -69,3 +69,26 @@ a {
 img {
 	width: 100%;
 }
+
+blockquote {
+	padding: 2rem 3rem 2rem;
+	position: relative;
+	border-left: 0.1rem solid var(--clr-accent);
+}
+blockquote p {
+	text-align: center;
+	font-size: 130%;
+	font-family: 'Piazzolla', serif;
+	font-style: italic;
+}
+
+/* disable all animation and transition who disbale in sttings */
+/*  media prefer no motion */
+@media screen and (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-property: none !important;
+	}
+}
